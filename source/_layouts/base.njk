@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% set css %}
+		{% include "styles.njk" %}
+	{% endset %}
+	<!-- Inline CSS -->
+	<style>{{ css | cssmin | safe }}</style>
+
+	<!-- Try and serve Google Fonts in the most efficent way possible -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+	<noscript>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" type="text/css" />
+	</noscript>
+
+	<title>{% if title %}{{ title }}{% else %}Chris Collins{% endif %}</title>
+	<meta name="description" content="{% if description %}{{ description }}{% else %}Chris Collins is a Glasgow based multi-disciplinary software engineer working across digital design, web development and solutions architecture.{% endif %}">
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" href="/static/favicon-apple.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+
+	<!-- Open Graph -->
+	<meta property="og:url" content="https://chrissy.dev{{ page.url }}">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="{% if title %}{{ title }}{% else %}Chris Collins{% endif %}">
+	<meta property="og:image" content="{% if cover %}https://chrissy.dev{{ page.url | url }}{{ cover }}{% else %}https://chrissy.dev/static/opengraph-cover.jpg{% endif %}" />
+	<meta property="og:description" content="{% if description %}{{ description }}{% else %}Chris Collins is a Glasgow based multi-disciplinary software engineer working across digital design, web development and solutions architecture.{% endif %}" />
+	<meta property="og:site_name" content="Chris Collins">
+	<meta property="og:locale" content="en_US">
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+	<nav class="navigation">
+		<ul>
+			<li><a href="/" class="{{ 'active' if '/' === page.url }}">Home</a></li>
+			<li><a href="/notes" class="{{ 'active' if '/notes' in page.url }}">Notes</a></li>
+			<li><a href="/uses" class="{{ 'active' if '/uses' in page.url }}">Uses</a></li>
+			<li><a href="/now" class="{{ 'active' if '/now' in page.url }}">Now</a></li>
+			<li><a href="mailto:chris@chriscollins.me">Email</a></li>
+		</ul>
+	</nav>
+	<main class="container">
+			{{ content | safe }}
+	</main>
+
+	<footer class="container">
+		<div class="footer">
+			<section>
+				<ul>
+					<li><strong>Social:</strong></li>
+					<li><a href="https://instagram.com/scottishstoater">Instagram</a></li>
+					<li><a href="https://twitter.com/scottishstoater">Twitter</a></li>
+					<li><a href="https://github.com/scottishstoater">GitHub</a></li>
+					<li><a href="https://linkedin.com/in/chriscollinsme">LinkedIn</a></li>
+				</ul>
+				<small>
+					© 2021
+				</small>
+			</section>
+
+			<button class="js-theme-toggle">
+				<span class="visually-hidden">Toggle Dark & Light Mode</span>
+				<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" tabindex="-1" focusable="false" width="1.5em" height="1.5em" fill="currentColor" class="moon" viewBox="0 0 512 512"><path d="M264 480A232 232 0 0132 248c0-94 54-178.28 137.61-214.67a16 16 0 0121.06 21.06C181.07 76.43 176 104.66 176 136c0 110.28 89.72 200 200 200 31.34 0 59.57-5.07 81.61-14.67a16 16 0 0121.06 21.06C442.28 426 358 480 264 480z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" tabindex="-1" focusable="false" width="1.5em" height="1.5em" viewBox="0 0 24 24" class="sun"><path d="M12 6a1 1 0 001-1V3a1 1 0 00-2 0v2a1 1 0 001 1zM21 11h-2a1 1 0 000 2h2a1 1 0 000-2zM6 12a1 1 0 00-1-1H3a1 1 0 000 2h2a1 1 0 001-1zM6.22 5a1 1 0 00-1.39 1.47l1.44 1.39a1 1 0 00.73.28 1 1 0 00.72-.31 1 1 0 000-1.41zM17 8.14a1 1 0 00.69-.28l1.44-1.39A1 1 0 0017.78 5l-1.44 1.42a1 1 0 000 1.41 1 1 0 00.66.31zM12 18a1 1 0 00-1 1v2a1 1 0 002 0v-2a1 1 0 00-1-1zM17.73 16.14a1 1 0 00-1.39 1.44L17.78 19a1 1 0 00.69.28 1 1 0 00.72-.3 1 1 0 000-1.42zM6.27 16.14l-1.44 1.39a1 1 0 000 1.42 1 1 0 00.72.3 1 1 0 00.67-.25l1.44-1.39a1 1 0 00-1.39-1.44zM12 8a4 4 0 104 4 4 4 0 00-4-4z"/></svg>
+			</button>
+		</div>
+	</footer>
+</body>
+	{% set scripts %}
+		{% include "scripts.js" %}
+	{% endset %}
+	<!-- Inline CSS -->
+	<script>{{ scripts | jsmin | safe }}</script>
+	<script async defer data-website-id="ec18d1cf-6712-4972-b23b-ca4ce2dee09a" src="https://i.scottishstoater.com/umami.js"></script>
+</html>
